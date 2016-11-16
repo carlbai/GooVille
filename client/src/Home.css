@@ -1,0 +1,9 @@
+.ThumbnailList {
+    list-style-type: none;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.Thumbnail {
+    padding: 1em;
+}
