@@ -7,14 +7,14 @@ import Watch from './Watch';
 import './index.css';
 
 ReactDOM.render(
-  <Router history={browserHistory}>
-    {/* add the routes here */}
-    <Route path="/" component={App}>
-      <IndexRoute component={Home}/>
+    <Router history={browserHistory}>
+        {/* add the routes here */}
+        <Route path="/" component={App}>
+            <IndexRoute component={Home} />
 
-      <Route path="/watch/:videoID" component={Watch}/>
+            <Route path="/watch/:videoID" component={Watch} />
 
-    </Route>
-  </Router>,
-  document.getElementById('root')
+        </Route>
+    </Router>,
+    document.getElementById('root')
 );

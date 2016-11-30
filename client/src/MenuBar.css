@@ -1,0 +1,20 @@
+.MenuBar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background-color: lightgrey;
+}
+
+.MenuItems {
+    list-style-type: none;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.MenuItem {
+    padding: 1em;
+}
+
+.Submit {
+    padding: 2em;
+}
