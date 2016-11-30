@@ -32,7 +32,4 @@ class MenuBar extends Component {
     }
 }
 
-// {videos.map((video) =>
-//                 <Thumbnail key={video.id} url={video.url} videoID={video.videoID}/> 
-//             )}
 export default MenuBar;
