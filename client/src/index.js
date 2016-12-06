@@ -6,8 +6,10 @@ import Home from './Home';
 import Watch from './Watch';
 import Submit from './Submit';
 import './index.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 ReactDOM.render(
+  <MuiThemeProvider>
     <Router history={browserHistory}>
         {/* add the routes here */}
         <Route path="/" component={App}>
@@ -17,6 +19,7 @@ ReactDOM.render(
             <Route path="/submit" component={Submit} />
 
         </Route>
-    </Router>,
+    </Router>
+    </MuiThemeProvider>,
     document.getElementById('root')
 );
