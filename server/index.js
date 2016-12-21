@@ -14,6 +14,12 @@ app.get('/videolist', function(req, res) {
   })
 })
 
+app.get('/resetdatabase', function(req, res) {
+  db.resetDB(function(data) {
+    res.send(data);
+  });
+})
+
 app.listen(8080, function () {
   console.log(__dirname + "/../client");
   console.log('Example app listening on port 8080!')
