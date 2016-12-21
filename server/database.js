@@ -9,8 +9,7 @@ var getAll = function(callback) {
             callback(data);
         })
         .catch(function (error) {
-            console.log("error: ");
-            console.log(error);
+            console.log("error: " + error);
             callback("error when reading from db");
         });
 }
@@ -38,11 +37,22 @@ var resetDB = function(callback) {
             callback("successful");
         })
         .catch(function (error) {
-            console.log("reset table unsuccessful, error: ");
-            console.log(error); // printing the error;
+            console.log("reset table unsuccessful, error: " + error);
             callback("not successful");
         });
 }
 
+var insertItem = function(item) {
+    db.none('insert into gooville(videoid) values($1)', item)
+        .then(function() {
+            callback('successful');
+        })
+        .catch(function(error) {
+            console.log('error: ' + error);
+            callback('not successful');
+        })
+}
+
 exports.getAll = getAll;
 exports.resetDB = resetDB;
+exports.insertItem = insertItem;
