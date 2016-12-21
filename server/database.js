@@ -6,11 +6,11 @@ var db = pgp(connection.connection);
 var getAll = function(callback) {
     db.any("select * from gooville")
         .then(function (data) {
-            console.log(data);
             callback(data);
         })
         .catch(function (error) {
-            console.log("error");
+            console.log("error: ");
+            console.log(error);
             callback("error when reading from db");
         });
 }
@@ -35,7 +35,6 @@ var resetDB = function(callback) {
         return this.batch(queries);
     })
         .then(function () {
-            console.log("reset database was successful");
             callback("successful");
         })
         .catch(function (error) {

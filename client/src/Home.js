@@ -1,43 +1,64 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import './Home.css';
+import * as request from "superagent";
 
 // Youtube thumbnails: http://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
 function Thumbnail(props) {
     return(
         <li className="Thumbnail">
-            <Link to={"/watch/" + props.videoID}>
-                <img src={"https://img.youtube.com/vi/" + props.videoID + "/default.jpg"} alt="title of video here"/>
+            <Link to={"/watch/" + props.videoid}>
+                <img src={"https://img.youtube.com/vi/" + props.videoid + "/default.jpg"} alt="title of video here"/>
             </Link>
         </li> 
     );
 }
 
-function ThumbnailList(props) {
-    const videos = props.videos;
-    return (
-        <ul className="ThumbnailList">
-            {videos.map((video) =>
-                <Thumbnail key={video.id} url={video.url} videoID={video.videoID}/> 
-            )}
-        </ul>
-    );
+class ThumbnailList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {videos: []};
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props !== nextProps) {
+            this.setState({videos: nextProps.videos});
+        }
+    }
+
+    render() {
+        return (
+            <ul className="ThumbnailList">
+                {this.state.videos.map((video) =>
+                    <Thumbnail key={video.id} url={"https://www.youtube.com/watch?" + video.videoid} videoid={video.videoid} />
+                )}
+            </ul>
+        );
+    }
 }
 
-// TODO: replace later with call to server
-const dillonvideolist = [
-    {"id": "id1","url": "https://www.youtube.com/watch?v=7z54Ybs0DZg", "videoID": "7z54Ybs0DZg"}, 
-    {"id": "id2","url": "https://www.youtube.com/watch?v=pmCi7tqrne4", "videoID": "pmCi7tqrne4"}, 
-    {"id": "id3","url": "https://www.youtube.com/watch?v=EFig-bHcBLE", "videoID": "EFig-bHcBLE"}, 
-    {"id": "id4","url": "https://www.youtube.com/watch?v=UtoPxEFeDrE", "videoID": "UtoPxEFeDrE"}, 
-    {"id": "id5","url": "https://www.youtube.com/watch?v=Klq8yYV5cLE", "videoID": "Klq8yYV5cLE"}, 
-    {"id": "id6","url": "https://www.youtube.com/watch?v=tRf4S_ArF_A", "videoID": "tRf4S_ArF_A"}
-];
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {videolist: []};
+    }
+
+    componentDidMount() {
+        var self = this;
+        request
+            .get('/videolist')
+            .end(function(err, res) {
+                if(err) {
+                    console.log('could not retrieve video list');
+                }
+                self.setState({videolist: JSON.parse(res.text)});
+            });
+    }
+
     render () {
         return(
             <div>
-                <ThumbnailList videos={dillonvideolist} />
+                <ThumbnailList videos={this.state.videolist} />
             </div>
         );
     }
