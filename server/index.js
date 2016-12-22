@@ -20,6 +20,12 @@ app.get('/resetdatabase', function(req, res) {
   });
 })
 
+app.post('/insertitem', function(req, res) {
+  db.insertItem(req.body.videoid, function(data) {
+    res.send(data);
+  })
+})
+
 app.listen(8080, function () {
   console.log(__dirname + "/../client");
   console.log('Example app listening on port 8080!')

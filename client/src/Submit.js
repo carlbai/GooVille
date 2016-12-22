@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AutoComplete from 'material-ui/AutoComplete';
 import Chip from 'material-ui/Chip';
+import * as request from "superagent";
 
 const styles = {
   div:{
@@ -81,6 +82,13 @@ class Submit extends Component {
     handleSubmit(event) {
       //TODO: Submit to DB
       console.log("submit", event);
+
+      // request
+      //   .post('/insertitem')
+      //   .send({ videoid: ''})
+      //   .end(function(err, res) {
+      //       console.log('sent request');
+      //   });
     }
 
     handleVideoPreview(event) {
