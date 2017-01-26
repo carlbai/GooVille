@@ -2,8 +2,10 @@ var express = require('express');
 var db = require('./database.js');
 var app = express();
 var path = require('path');
+var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + "/../client/build"));
+app.use(bodyParser.json()); // for parsing application/json
 
 app.get('/hi', function (req, res) {
   res.send('Hello World!');
@@ -25,6 +27,7 @@ app.post('/insertitem', function(req, res) {
   db.insertItem(req.body.videoid, function(data) {
     res.send(data);
   })
+})
 
 //catch all route
 app.get('*', function(req, res) {
