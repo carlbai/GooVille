@@ -1,6 +1,7 @@
 var express = require('express');
 var db = require('./database.js');
 var app = express();
+var path = require('path');
 
 app.use(express.static(__dirname + "/../client/build"));
 
@@ -24,6 +25,10 @@ app.post('/insertitem', function(req, res) {
   db.insertItem(req.body.videoid, function(data) {
     res.send(data);
   })
+
+//catch all route
+app.get('*', function(req, res) {
+  res.sendFile(path.resolve(__dirname+'/../client/build/index.html'));
 })
 
 app.listen(8080, function () {

@@ -71,6 +71,7 @@ class Submit extends Component {
       };
 
       this.handleChange = this.handleChange.bind(this);
+      this.handleVideoPreview = this.handleVideoPreview.bind(this);
     }
 
     handleChange(event) {
@@ -92,8 +93,16 @@ class Submit extends Component {
     }
 
     handleVideoPreview(event) {
-      //TODO: add URL validation
-      $("#videoPreview").attr("src", event.target.value);
+      var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&\?]*).*/;
+      var url = (event.target.value).match(regExp);
+      //assumes video id's are 11 characters
+      if (url && url[2].length === 11) {
+        //TODO: Call to get creator name from Youtube with extracted watchID
+        var embeddedURL = 'https://youtube.com/embed/' + url[2];
+        $("#videoPreview").attr("src", embeddedURL);
+      } else {
+        this.setState({errorText: 'This is not valid!'});
+      }
     }
 
     handleRequestDelete(event) {
@@ -118,7 +127,7 @@ class Submit extends Component {
               <form onSubmit={this.handleSubmit}>
                 <TextField hintText="Enter Animation Title" floatingLabelText="Animation Title" floatingLabelFixed={true} value={this.state.title} id="title" onChange={this.handleChange}/><br />
                 <TextField hintText="Enter Creator Name" floatingLabelText="Creator Name" floatingLabelFixed={true} value={this.state.creator} id="creator" onChange={this.handleChange}/><br />
-                <TextField hintText="Enter Video URL" floatingLabelText="Video URL" floatingLabelFixed={true} onChange={this.handleVideoPreview}/><br />
+                <TextField hintText="Enter Video URL" errorText={this.state.errorText} floatingLabelText="Video URL" floatingLabelFixed={true} onChange={this.handleVideoPreview}/><br />
                 <TextField style={{textAlign: 'left'}} hintText="Enter Description" floatingLabelText="Description" floatingLabelFixed={true} value={this.state.description} id="description" onChange={this.handleChange} multiLine={true} rows={4}></TextField><br />
                 <AutoComplete floatingLabelText="Select Tags" floatingLabelFixed={true} dataSource={tagOptions} filter={AutoComplete.caseInsensitiveFilter} onNewRequest={(value) => value.text}/><br />
                 <div style={styles.chipWrapper}><Chip style={styles.chip} onRequestDelete={this.handleRequestDelete}>Romance</Chip></div><br /><br />
