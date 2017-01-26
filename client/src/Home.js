@@ -50,8 +50,9 @@ class Home extends Component {
             .end(function(err, res) {
                 if(err) {
                     console.log('could not retrieve video list');
+                } else {
+                    self.setState({videolist: JSON.parse(res.text)});
                 }
-                self.setState({videolist: JSON.parse(res.text)});
             });
     }
 

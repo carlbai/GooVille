@@ -42,7 +42,7 @@ var resetDB = function(callback) {
         });
 }
 
-var insertItem = function(item) {
+var insertItem = function(item, callback) {
     db.none('insert into gooville(videoid) values($1)', item)
         .then(function() {
             callback('successful');

@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AutoComplete from 'material-ui/AutoComplete';
 import Chip from 'material-ui/Chip';
+import * as request from "superagent";
 
 const styles = {
   div:{
@@ -66,11 +67,13 @@ class Submit extends Component {
       this.state = {
         title: 'Test Title',
         creator: this.user.name,
-        description: ''
+        description: '',
+        videoID: ''
       };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleVideoPreview = this.handleVideoPreview.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -82,6 +85,14 @@ class Submit extends Component {
     handleSubmit(event) {
       //TODO: Submit to DB
       console.log("submit", event);
+      
+      var self = this;
+      request
+        .post('/insertitem')
+        .send({ videoid: self.state.videoID})
+        .end(function(err, res) {
+            console.log('sent request');
+        });
     }
 
     handleVideoPreview(event) {
@@ -92,6 +103,7 @@ class Submit extends Component {
         //TODO: Call to get creator name from Youtube with extracted watchID
         var embeddedURL = 'https://youtube.com/embed/' + url[2];
         $("#videoPreview").attr("src", embeddedURL);
+        this.setState({videoID: url[2]}); // save current videoID
       } else {
         this.setState({errorText: 'This is not valid!'});
       }
