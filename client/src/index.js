@@ -15,7 +15,7 @@ ReactDOM.render(
         <Route path="/" component={App}>
             <IndexRoute component={Home} />
 
-            <Route path="/watch/:videoID" component={Watch} />
+            <Route path="/watch/:videoID" component={Watch}/>
             <Route path="/submit" component={Submit} />
 
         </Route>

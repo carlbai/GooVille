@@ -1,9 +1,13 @@
-.ThumbnailList {
+.home-thumbnailList {
     list-style-type: none;
     display: flex;
     flex-flow: row wrap;
 }
 
-.Thumbnail {
+.related-video-thumbnail {
+  display: inline-block;
+}
+
+.thumbnail {
     padding: 1em;
 }

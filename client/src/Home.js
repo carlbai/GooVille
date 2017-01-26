@@ -6,7 +6,7 @@ import * as request from "superagent";
 // Youtube thumbnails: http://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
 function Thumbnail(props) {
     return(
-        <li className="Thumbnail">
+        <li className="thumbnail">
             <Link to={"/watch/" + props.videoid}>
                 <img src={"https://img.youtube.com/vi/" + props.videoid + "/default.jpg"} alt="title of video here"/>
             </Link>
@@ -28,7 +28,7 @@ class ThumbnailList extends Component {
 
     render() {
         return (
-            <ul className="ThumbnailList">
+            <ul className="home-thumbnailList">
                 {this.state.videos.map((video) =>
                     <Thumbnail key={video.id} url={"https://www.youtube.com/watch?" + video.videoid} videoid={video.videoid} />
                 )}

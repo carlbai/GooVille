@@ -1,0 +1,54 @@
+.description-wrapper {
+  border-bottom: 2px solid gray;
+}
+
+.description-wrapper:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+.description-avatar {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+}
+
+.description-avatar-wrapper {
+  height: 100px;
+  padding: 10px 0px;
+  float: left;
+}
+
+.description-stats {
+  float: right;
+}
+
+.description-content-wrapper {
+  border-bottom: 2px solid gray;
+  padding: 10px 0px;
+}
+
+.creator-wrapper {
+  vertical-align: top;
+  display: inline-block;
+  height: 100px;
+  margin-left: 10px;
+}
+
+.creator {
+  margin-bottom: 10px;
+}
+
+.follow {
+  display: inline-block;
+}
+
+.patreon {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.icon-details {
+  margin-left: 10px;
+}
