@@ -3,9 +3,12 @@ var db = require('./database.js');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+var request = require('superagent');
 
 app.use(express.static(__dirname + "/../client/build"));
 app.use(bodyParser.json()); // for parsing application/json
+
+var apiKey = '';
 
 app.get('/hi', function (req, res) {
   res.send('Hello World!');
@@ -27,6 +30,19 @@ app.post('/insertitem', function(req, res) {
   db.insertItem(req.body.videoid, function(data) {
     res.send(data);
   })
+})
+
+app.post('/getVideo', function(req, res) {
+  request
+    .get('https://www.googleapis.com/youtube/v3/videos')
+    .query({
+      part: 'snippet,id,statistics',
+      id: req.body.videoid,
+      key: apiKey
+    })
+    .then(function(data) {
+      res.send(data.body.items[0])
+    });
 })
 
 //catch all route

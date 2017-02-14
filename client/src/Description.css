@@ -27,6 +27,30 @@
 .description-content-wrapper {
   border-bottom: 2px solid gray;
   padding: 10px 0px;
+  position: relative;
+}
+
+.desc-hidden {
+  max-height: 120px;
+}
+
+.desc-box {
+  overflow: hidden;
+}
+
+.see-more-hidden {
+  display: none;
+}
+
+.see-more {
+  background-image: linear-gradient(to bottom, transparent 1%, white 100%);
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 100px 0px 0px 0px;
 }
 
 .creator-wrapper {

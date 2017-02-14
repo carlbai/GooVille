@@ -14,22 +14,25 @@ var getAll = function(callback) {
         });
 }
 
-const dillonvideolist = [
-    "7z54Ybs0DZg",
-    "pmCi7tqrne4",
-    "EFig-bHcBLE",
-    "UtoPxEFeDrE",
-    "Klq8yYV5cLE",
-    "tRf4S_ArF_A"
-]
-
 var resetDB = function(callback) {
     db.tx(function (t) {
+        var cs = new pgp.helpers.ColumnSet(['videoid', 'creator', 'title'], {table:'gooville'});
+        var values = [
+            {videoid:"7z54Ybs0DZg", creator:"test1", title:"test1"},
+            {videoid:"7z54Ybs0DZg", creator:"test2", title:"test2"},
+            {videoid:"pmCi7tqrne4", creator:"test3", title:"test3"},
+            {videoid:"EFig-bHcBLE", creator:"test4", title:"test4"},
+            {videoid:"UtoPxEFeDrE", creator:"test5", title:"test5"},
+            {videoid:"Klq8yYV5cLE", creator:"test6", title:"test6"},
+            {videoid:"tRf4S_ArF_A", creator:"test7", title:"test7"}
+        ];
+        var insertQuery = pgp.helpers.insert(values, cs);
+
         // `t` and `this` here are the same;
         var queries = [
             this.none('drop table if exists gooville;'),
-            this.none('create table gooville(id serial primary key, videoid text)'),
-            this.none('insert into gooville(videoid) values($1),($2),($3),($4),($5),($6)', dillonvideolist)
+            this.none('create table gooville(id serial primary key, videoid text, creator varchar(50), title varchar(100))'),
+            this.none(insertQuery)
         ];
         return this.batch(queries);
     })
