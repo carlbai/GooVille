@@ -26,7 +26,10 @@ class MenuBar extends Component {
                         <MenuItem key={menuItem.name} name={menuItem.name} link={menuItem.link} />
                     )}
                 </ul>
-                <Link to="/submit" className="Submit">Submit</Link>
+                <ul className="ActionItems">
+                    <Link to="/login" className="ActionItem">Login</Link>
+                    <Link to="/submit" className="ActionItem">Submit</Link>
+                </ul>
             </div>
         );
     }

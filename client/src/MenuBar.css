@@ -15,6 +15,12 @@
     padding: 1em;
 }
 
-.Submit {
-    padding: 2em;
+.ActionItems {
+    list-style-type: none;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.ActionItem {
+    padding: 1em;
 }

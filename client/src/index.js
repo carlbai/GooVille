@@ -5,6 +5,7 @@ import App from './App';
 import Home from './Home';
 import Watch from './Watch';
 import Submit from './Submit';
+import Login from './Login';
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -15,7 +16,8 @@ ReactDOM.render(
         <Route path="/" component={App}>
             <IndexRoute component={Home} />
 
-            <Route path="/watch/:videoID" component={Watch}/>
+            <Route path="/watch/:videoID" component={Watch} />
+            <Route path="/login" component={Login} />
             <Route path="/submit" component={Submit} />
 
         </Route>
