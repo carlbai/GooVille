@@ -5,10 +5,10 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var request = require('superagent');
 
-app.use(express.static(__dirname + "/../client/build"));
+app.use(express.static(__dirname + "/client/build"));
 app.use(bodyParser.json()); // for parsing application/json
 
-var apiKey = '';
+var apiKey = 'AIzaSyAQjQPuiTyrWILTJB0aDEHEe2okHFbl0t0';
 
 app.get('/hi', function (req, res) {
   res.send('Hello World!');
@@ -47,10 +47,10 @@ app.post('/getVideo', function(req, res) {
 
 //catch all route
 app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname+'/../client/build/index.html'));
+  res.sendFile(path.resolve(__dirname+'/client/build/index.html'));
 })
 
 app.listen(8080, function () {
-  console.log(__dirname + "/../client");
+  console.log(__dirname + "/client");
   console.log('Example app listening on port 8080!')
 })
